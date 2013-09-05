@@ -52,10 +52,10 @@ $product->price->add(new Jam_Price(20, 'EUR'), new Jam_Price(10, 'GBP'), 12.32);
 
 ## Methods
 
-__in($currency)__: display the amount in the specified currency, put through number_format with 2 digits after the dot
-__as_string__($currency = NULL): return the number_format() on the price's amount, with 2 digits after the dot.
-__humanize($currency = NULL)__: display the amount with shoing the proper currency sign in the correct position
-__add(... prices)__: add one or more price values to this price (you can add negative prices in order to substract)
+- ``in($currency)`` : display the amount in the specified currency, put through number_format with 2 digits after the dot
+- ``as_string($currency = NULL)`` : return the number_format() on the price's amount, with 2 digits after the dot.
+- ``humanize($currency = NULL)`` : display the amount with shoing the proper currency sign in the correct position
+- ``add(... prices)`` : add one or more price values to this price (you can add negative prices in order to substract)
 
 ## Automatic currency and monetary values
 
