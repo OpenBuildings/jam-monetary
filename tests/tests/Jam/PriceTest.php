@@ -7,6 +7,21 @@ class Jam_PriceTest extends Testcase_Monetary {
 
 	/**
 	 * @covers Jam_Price::amount
+	 */
+	public function test_sum()
+	{
+		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
+
+		$price1 = new Jam_Price(13.234, 'GBP', $monetary);
+		$price2 = new Jam_Price(5, 'GBP', $monetary);
+		$price3 = new Jam_Price(8.5, 'EUR', $monetary);
+
+		$this->assertSame(40.238901914488, Jam_Price::sum('USD', array($price1, $price2, $price3)));
+		$this->assertSame(25.371025, Jam_Price::sum('GBP', $price1, $price2, $price3));
+	}
+
+	/**
+	 * @covers Jam_Price::amount
 	 * @covers Jam_Price::currency
 	 * @covers Jam_Price::monetary
 	 * @covers Jam_Price::__construct

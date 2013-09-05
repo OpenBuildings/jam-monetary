@@ -10,6 +10,30 @@ use OpenBuildings\Monetary\Monetary;
  */
 class Kohana_Jam_Price implements Serializable {
 
+	public static function sum($currency, $prices)
+	{
+		$prices = is_array($prices) ? $prices : array_slice(func_get_args(), 1);
+		$amount = 0;
+
+		foreach ($prices as $price) 
+		{
+			if ( ! ($price instanceof Jam_Price))
+			{
+				$amount += (float) $price;
+			}
+			elseif ($price->currency() == $currency) 
+			{
+				$amount += $price->amount();
+			}
+			else
+			{
+				$amount += $price->in($currency);
+			}
+		}
+
+		return $amount;
+	}
+
 	protected $_amount = 0;
 	protected $_currency;
 	protected $_monetary;
@@ -107,22 +131,7 @@ class Kohana_Jam_Price implements Serializable {
 	public function add($price)
 	{
 		$prices = func_get_args();
-
-		foreach ($prices as $price) 
-		{
-			if ( ! ($price instanceof Jam_Price))
-			{
-				$this->amount($this->amount() + (float) $price);
-			}
-			elseif ($price->currency() == $this->currency()) 
-			{
-				$this->amount($this->amount() + $price->amount());
-			}
-			else
-			{
-				$this->amount($this->amount() + $price->in($this->currency()));	
-			}
-		}
+		$this->amount($this->amount() + Jam_Price::sum($this->currency(), $prices));
 
 		return $this;
 	}
