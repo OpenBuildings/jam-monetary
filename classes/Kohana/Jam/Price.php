@@ -144,6 +144,14 @@ class Kohana_Jam_Price implements Serializable {
 		return $this;
 	}
 
+	public function convert_to($currency)
+	{
+		$this->amount($this->in($currency));
+		$this->currency($currency);
+		
+		return $this;
+	}
+
 	/**
 	 * Perform price comparation, e.g. =, >, <, => or =<. Performs currency conversion if nesessary
 	 * @return boolean 
