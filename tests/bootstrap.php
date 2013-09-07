@@ -8,17 +8,15 @@ Kohana::modules(array(
 	'jam-monetary' => __DIR__.'/..',
 ));
 
-function test_autoload($class)
+spl_autoload_register(function($class)
 {
-	$file = str_replace('_', '/', $class);
+	$file = __DIR__.DIRECTORY_SEPARATOR.'classes'.DIRECTORY_SEPARATOR.str_replace('_', '/', $class).'.php';
 
-	if ($file = Kohana::find_file('tests/classes', $file))
+	if (is_file($file))
 	{
 		require_once $file;
 	}
-}
-
-spl_autoload_register('test_autoload');
+});
 
 Kohana::$config
 	->load('database')

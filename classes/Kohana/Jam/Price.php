@@ -187,7 +187,6 @@ class Kohana_Jam_Price implements Serializable {
 			break;
 			default;
 				throw new Kohana_Exception('Operator not supported :operator', array(':operator' => $operator));
-				
 		}
 		return $result;
 	}
