@@ -42,4 +42,15 @@ class Jam_Field_PriceTest extends Testcase_Monetary {
 		$product->price = NULL;
 		$this->assertNull($product->price);
 	}
+
+	public function test_default_price()
+	{
+		$variation = Jam::build('variation', array('price' => 10));
+
+		$price = $variation->price;
+
+		$this->assertEquals('GBP', $price->currency());
+
+		$this->assertSame(OpenBuildings\Monetary\Monetary::instance(), $price->monetary());
+	}
 }

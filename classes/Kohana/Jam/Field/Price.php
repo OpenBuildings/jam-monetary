@@ -1,6 +1,6 @@
 <?php
 
-use Openbuildings\Monetary\Monetary;
+use OpenBuildings\Monetary\Monetary;
 
 /**
  * @package    Openbuildings\Jam
