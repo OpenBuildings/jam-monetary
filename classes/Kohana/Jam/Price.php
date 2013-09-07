@@ -10,6 +10,12 @@ use OpenBuildings\Monetary\Monetary;
  */
 class Kohana_Jam_Price implements Serializable {
 
+	const EQUAL_TO = '=';
+	const GREATER_THAN = '>';
+	const LESS_THAN = '<';
+	const GREATER_THAN_OR_EQUAL = '>=';
+	const LESS_THAN_OR_EQUAL = '<=';
+
 	public static function sum($currency, $prices)
 	{
 		$prices = is_array($prices) ? $prices : array_slice(func_get_args(), 1);
@@ -134,6 +140,43 @@ class Kohana_Jam_Price implements Serializable {
 		$this->amount($this->amount() + Jam_Price::sum($this->currency(), $prices));
 
 		return $this;
+	}
+
+	/**
+	 * Perform price comparation, e.g. =, >, <, => or =<. Performs currency conversion if nesessary
+	 * @return boolean 
+	 * @param string $operator 
+	 * @param mixed value 
+	 */
+	public function is($operator, $value)
+	{
+		if ($value instanceof Jam_Price) 
+		{
+			$value = $value->in($this->currency());
+		}
+
+		switch ($operator) 
+		{
+			case Jam_Price::EQUAL_TO:
+				$result = ($this->amount() == $value);
+			break;
+			case Jam_Price::GREATER_THAN:
+				$result = ($this->amount() > $value);
+			break;
+			case Jam_Price::LESS_THAN:
+				$result = ($this->amount() < $value);
+			break;
+			case Jam_Price::GREATER_THAN_OR_EQUAL:
+				$result = ($this->amount() >= $value);
+			break;
+			case Jam_Price::LESS_THAN_OR_EQUAL:
+				$result = ($this->amount() <= $value);
+			break;
+			default;
+				throw new Kohana_Exception('Operator not supported :operator', array(':operator' => $operator));
+				
+		}
+		return $result;
 	}
 
 	/**

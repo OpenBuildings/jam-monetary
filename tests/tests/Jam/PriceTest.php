@@ -74,6 +74,32 @@ class Jam_PriceTest extends Testcase_Monetary {
 	}
 
 	/**
+	 * @covers Jam_Price::is
+	 */
+	public function test_is()
+	{
+		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
+
+		$price1 = new Jam_Price(10.2, 'GBP', $monetary);
+		$price2 = new Jam_Price(11.5, 'EUR', $monetary);
+
+		$this->assertTrue($price1->is(Jam_Price::EQUAL_TO, $price1));
+		$this->assertFalse($price1->is(Jam_Price::EQUAL_TO, $price2));
+
+		$this->assertTrue($price1->is(Jam_Price::GREATER_THAN, $price2));
+		$this->assertFalse($price1->is(Jam_Price::LESS_THAN, $price2));
+		$this->assertFalse($price2->is(Jam_Price::GREATER_THAN, $price1));
+		$this->assertTrue($price2->is(Jam_Price::LESS_THAN, $price1));
+
+		$this->assertTrue($price1->is(Jam_Price::GREATER_THAN_OR_EQUAL, $price2));
+		$this->assertTrue($price1->is(Jam_Price::GREATER_THAN_OR_EQUAL, $price1));
+		$this->assertFalse($price1->is(Jam_Price::LESS_THAN_OR_EQUAL, $price2));
+		$this->assertTrue($price2->is(Jam_Price::LESS_THAN_OR_EQUAL, $price1));
+		$this->assertFalse($price2->is(Jam_Price::GREATER_THAN_OR_EQUAL, $price1));
+		$this->assertTrue($price2->is(Jam_Price::LESS_THAN_OR_EQUAL, $price1));
+	}
+
+	/**
 	 * @covers Jam_Price::add
 	 */
 	public function test_add()
