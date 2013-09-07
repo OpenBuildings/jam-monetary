@@ -6,7 +6,7 @@
 class Jam_PriceTest extends Testcase_Monetary {
 
 	/**
-	 * @covers Jam_Price::amount
+	 * @covers Jam_Price::sum
 	 */
 	public function test_sum()
 	{
@@ -16,8 +16,10 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$price2 = new Jam_Price(5, 'GBP', $monetary);
 		$price3 = new Jam_Price(8.5, 'EUR', $monetary);
 
-		$this->assertSame(40.238901914488, Jam_Price::sum('USD', array($price1, $price2, $price3)));
-		$this->assertSame(25.371025, Jam_Price::sum('GBP', $price1, $price2, $price3));
+		$this->assertEquals('USD', Jam_Price::sum('USD', array($price1, $price2, $price3))->currency());
+		$this->assertSame(40.238901914488, Jam_Price::sum('USD', array($price1, $price2, $price3))->amount());
+		$this->assertSame(25.371025, Jam_Price::sum('GBP', $price1, $price2, $price3)->amount());
+		$this->assertSame(45.371025, Jam_Price::sum('GBP', $price1, $price2, $price3, 20)->amount());
 	}
 
 	/**
@@ -97,6 +99,20 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$this->assertTrue($price2->is(Jam_Price::LESS_THAN_OR_EQUAL, $price1));
 		$this->assertFalse($price2->is(Jam_Price::GREATER_THAN_OR_EQUAL, $price1));
 		$this->assertTrue($price2->is(Jam_Price::LESS_THAN_OR_EQUAL, $price1));
+	}
+
+	/**
+	 * @covers Jam_Price::is
+	 * @expectedException Kohana_Exception
+	 */
+	public function test_is_unknow_operator()
+	{
+		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
+
+		$price1 = new Jam_Price(10.2, 'GBP', $monetary);
+		$price2 = new Jam_Price(11.5, 'EUR', $monetary);
+
+		$this->assertTrue($price1->is('something', $price1));
 	}
 
 	/**

@@ -37,7 +37,7 @@ class Kohana_Jam_Price implements Serializable {
 			}
 		}
 
-		return $amount;
+		return new Jam_Price($amount, $currency);
 	}
 
 	protected $_amount = 0;
@@ -137,7 +137,9 @@ class Kohana_Jam_Price implements Serializable {
 	public function add($price)
 	{
 		$prices = func_get_args();
-		$this->amount($this->amount() + Jam_Price::sum($this->currency(), $prices));
+		array_unshift($prices, $this);
+
+		$this->amount(Jam_Price::sum($this->currency(), $prices)->amount());
 
 		return $this;
 	}
