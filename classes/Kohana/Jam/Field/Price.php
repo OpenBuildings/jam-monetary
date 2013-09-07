@@ -1,5 +1,7 @@
 <?php
 
+use Openbuildings\Monetary\Monetary;
+
 /**
  * @package    Openbuildings\Jam
  * @author     Ivan Kerin <ikerin@gmail.com>
