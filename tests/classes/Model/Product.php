@@ -9,7 +9,8 @@ class Model_Product extends Jam_Model {
 				'id' => Jam::field('primary'),
 				'name' => Jam::field('string'),
 				'price' => Jam::field('price', array('default_currency' => 'GBP')),
-			));
+			))
+			->validator('price', array('price' => array('greater_than' => 10)));
 
 	}
 

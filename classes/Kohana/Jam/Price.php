@@ -13,8 +13,8 @@ class Kohana_Jam_Price implements Serializable {
 	const EQUAL_TO = '=';
 	const GREATER_THAN = '>';
 	const LESS_THAN = '<';
-	const GREATER_THAN_OR_EQUAL = '>=';
-	const LESS_THAN_OR_EQUAL = '<=';
+	const GREATER_THAN_OR_EQUAL_TO = '>=';
+	const LESS_THAN_OR_EQUAL_TO = '<=';
 
 	public static function sum($currency, $prices)
 	{
@@ -179,10 +179,10 @@ class Kohana_Jam_Price implements Serializable {
 			case Jam_Price::LESS_THAN:
 				$result = ($this->amount() < $value);
 			break;
-			case Jam_Price::GREATER_THAN_OR_EQUAL:
+			case Jam_Price::GREATER_THAN_OR_EQUAL_TO:
 				$result = ($this->amount() >= $value);
 			break;
-			case Jam_Price::LESS_THAN_OR_EQUAL:
+			case Jam_Price::LESS_THAN_OR_EQUAL_TO:
 				$result = ($this->amount() <= $value);
 			break;
 			default;
