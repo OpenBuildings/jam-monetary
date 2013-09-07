@@ -23,6 +23,22 @@ class Jam_PriceTest extends Testcase_Monetary {
 	}
 
 	/**
+	 * @covers Jam_Price::convert_to
+	 */
+	public function test_convert_to()
+	{
+		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
+
+		$price = new Jam_Price(13.234, 'GBP', $monetary);
+
+		$price->convert_to('USD');
+
+		$this->assertEquals('USD', $price->currency());
+		$this->assertEquals(20.98936199607, $price->amount());
+
+	}
+
+	/**
 	 * @covers Jam_Price::amount
 	 * @covers Jam_Price::currency
 	 * @covers Jam_Price::monetary

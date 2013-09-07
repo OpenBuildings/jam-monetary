@@ -146,9 +146,12 @@ class Kohana_Jam_Price implements Serializable {
 
 	public function convert_to($currency)
 	{
-		$this->amount($this->in($currency));
-		$this->currency($currency);
-		
+		if ($currency !== $this->currency()) 
+		{
+			$this->amount($this->in($currency));
+			$this->currency($currency);
+		}
+
 		return $this;
 	}
 
