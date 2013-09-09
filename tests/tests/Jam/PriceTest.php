@@ -37,6 +37,20 @@ class Jam_PriceTest extends Testcase_Monetary {
 	}
 
 	/**
+	 * @covers Jam_Price::multiply_by
+	 */
+	public function test_multiply_by()
+	{
+		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
+
+		$price = new Jam_Price(13.234, 'GBP', $monetary);
+
+		$converted = $price->multiply_by(3);
+
+		$this->assertEquals(13.234 * 3, $converted->amount());
+	}
+	
+	/**
 	 * @covers Jam_Price::amount
 	 * @covers Jam_Price::currency
 	 * @covers Jam_Price::monetary
