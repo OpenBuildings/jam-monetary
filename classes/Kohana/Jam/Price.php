@@ -16,9 +16,8 @@ class Kohana_Jam_Price implements Serializable {
 	const GREATER_THAN_OR_EQUAL_TO = '>=';
 	const LESS_THAN_OR_EQUAL_TO = '<=';
 
-	public static function sum($currency, $prices)
+	public static function sum(array $prices, $currency, $monetary = NULL)
 	{
-		$prices = is_array($prices) ? $prices : array_slice(func_get_args(), 1);
 		$amount = 0;
 
 		foreach ($prices as $price) 
@@ -37,7 +36,7 @@ class Kohana_Jam_Price implements Serializable {
 			}
 		}
 
-		return new Jam_Price($amount, $currency);
+		return new Jam_Price($amount, $currency, $monetary);
 	}
 
 	protected $_amount = 0;
@@ -139,20 +138,27 @@ class Kohana_Jam_Price implements Serializable {
 		$prices = func_get_args();
 		array_unshift($prices, $this);
 
-		$this->amount(Jam_Price::sum($this->currency(), $prices)->amount());
-
-		return $this;
+		return Jam_Price::sum($prices, $this->currency(), $this->monetary());
 	}
 
+	/**
+	 * Myltiply by a value
+	 * @param  mixed $value
+	 * @return Jam_Price
+	 */
+	public function multiply_by($value)
+	{
+		return new Jam_Price($this->amount() * $value, $this->currency(), $this->monetary());
+	}
+
+	/**
+	 * Convert the price to a different currency
+	 * @param  string $currency 
+	 * @return Jam_Price
+	 */
 	public function convert_to($currency)
 	{
-		if ($currency !== $this->currency()) 
-		{
-			$this->amount($this->in($currency));
-			$this->currency($currency);
-		}
-
-		return $this;
+		return new Jam_Price($this->in($currency), $currency);
 	}
 
 	/**

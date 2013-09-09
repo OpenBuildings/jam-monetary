@@ -16,10 +16,9 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$price2 = new Jam_Price(5, 'GBP', $monetary);
 		$price3 = new Jam_Price(8.5, 'EUR', $monetary);
 
-		$this->assertEquals('USD', Jam_Price::sum('USD', array($price1, $price2, $price3))->currency());
-		$this->assertSame(40.238901914488, Jam_Price::sum('USD', array($price1, $price2, $price3))->amount());
-		$this->assertSame(25.371025, Jam_Price::sum('GBP', $price1, $price2, $price3)->amount());
-		$this->assertSame(45.371025, Jam_Price::sum('GBP', $price1, $price2, $price3, 20)->amount());
+		$this->assertEquals('USD', Jam_Price::sum(array($price1, $price2, $price3), 'USD')->currency());
+		$this->assertSame(40.238901914488, Jam_Price::sum(array($price1, $price2, $price3), 'USD')->amount());
+		$this->assertSame(45.371025, Jam_Price::sum(array($price1, $price2, $price3, 20), 'GBP')->amount());
 	}
 
 	/**
@@ -31,11 +30,10 @@ class Jam_PriceTest extends Testcase_Monetary {
 
 		$price = new Jam_Price(13.234, 'GBP', $monetary);
 
-		$price->convert_to('USD');
+		$converted = $price->convert_to('USD');
 
-		$this->assertEquals('USD', $price->currency());
-		$this->assertEquals(20.98936199607, $price->amount());
-
+		$this->assertEquals('USD', $converted->currency());
+		$this->assertEquals(20.98936199607, $converted->amount());
 	}
 
 	/**
