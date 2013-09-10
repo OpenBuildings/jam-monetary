@@ -32,7 +32,7 @@ class Kohana_Jam_Price implements Serializable {
 			}
 			else
 			{
-				$amount += $price->in($currency);
+				$amount += $price->in($currency, $monetary);
 			}
 		}
 
@@ -202,7 +202,7 @@ class Kohana_Jam_Price implements Serializable {
 	 * @param  stirn $currency 
 	 * @return float
 	 */
-	public function in($currency = NULL)
+	public function in($currency = NULL, $monetary = NULL)
 	{
 		if ( ! $currency OR $currency == $this->currency())
 		{
@@ -210,7 +210,9 @@ class Kohana_Jam_Price implements Serializable {
 		}
 		else
 		{
-			return $this->monetary()->convert($this->amount(), $this->currency(), $currency);
+			$monetary = $monetary ?: $this->monetary();
+
+			return $monetary->convert($this->amount(), $this->currency(), $currency);
 		}
 	}
 
