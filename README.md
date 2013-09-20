@@ -63,6 +63,32 @@ If the model has a method ``currency()``, then each time a price object is reque
 
 The same goes for a ``monetary()`` method - if its there in the model, then it'll be used for all the conversions. 
 
+## Validators
+
+There are 2 out of the box validator rules - one for currency and one for price. 
+
+The price rule is basically a numeric rule, which performes the checks on the price's amount.
+
+The currency validator is a choice validator, with the currencies of the world preselected in the "in" variable.
+
+```php
+```php
+class Model_Product extends Jam_Model {
+
+	static public function initialize(Jam_Meta $meta)
+	{
+		$meta
+			->fields(array(
+				'id' => Jam::field('primary'),
+				'price' => Jam::field('price'),
+				'currency' => Jam::field('string'),
+			))
+			->validator('price' => array('price' => array('greater_than' => 10)))
+			->validator('currency' => array('currency' => TRUE));
+	}
+}
+```
+
 ## License
 
 Copyright (c) 2012-2013, OpenBuildings Ltd. Developed by Ivan Kerin as part of [clippings.com](http://clippings.com)
