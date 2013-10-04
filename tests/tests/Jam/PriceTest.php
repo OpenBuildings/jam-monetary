@@ -6,6 +6,37 @@
 class Jam_PriceTest extends Testcase_Monetary {
 
 	/**
+	 * @covers Jam_Price::min
+	 */
+	public function test_min()
+	{
+		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
+
+		$price1 = new Jam_Price(13.234, 'GBP', $monetary);
+		$price2 = new Jam_Price(5, 'GBP', $monetary);
+		$price3 = new Jam_Price(8.5, 'EUR', $monetary);
+
+		$result = Jam_Price::min(array($price1, $price2, $price3));
+
+		$this->assertSame($price2, $result);
+	}
+
+	/**
+	 * @covers Jam_Price::max
+	 */
+	public function test_max()
+	{
+		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
+
+		$price1 = new Jam_Price(13.234, 'GBP', $monetary);
+		$price2 = new Jam_Price(5, 'GBP', $monetary);
+		$price3 = new Jam_Price(8.5, 'EUR', $monetary);
+
+		$result = Jam_Price::max(array($price1, $price2, $price3));
+
+		$this->assertSame($price1, $result);
+	}
+	/**
 	 * @covers Jam_Price::sum
 	 */
 	public function test_sum()

@@ -16,6 +16,36 @@ class Kohana_Jam_Price implements Serializable {
 	const GREATER_THAN_OR_EQUAL_TO = '>=';
 	const LESS_THAN_OR_EQUAL_TO = '<=';
 
+	public static function min(array $prices)
+	{
+		$min = reset($prices);
+
+		foreach (array_slice($prices, 1) as $price) 
+		{
+			if ($price->is(Jam_Price::LESS_THAN, $min)) 
+			{
+				$min = $price;
+			}
+		}
+
+		return $min;
+	}
+
+	public static function max(array $prices)
+	{
+		$max = reset($prices);
+
+		foreach (array_slice($prices, 1) as $price) 
+		{
+			if ($price->is(Jam_Price::GREATER_THAN, $max)) 
+			{
+				$max = $price;
+			}
+		}
+
+		return $max;
+	}
+
 	public static function sum(array $prices, $currency, $monetary = NULL)
 	{
 		$amount = 0;
