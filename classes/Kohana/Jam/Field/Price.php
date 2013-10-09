@@ -16,7 +16,9 @@ class Kohana_Jam_Field_Price extends Jam_Field_String {
 
 	public $convert_empty = TRUE;
 
-	public $default_currency = 'USD';
+	public $default_currency = 'GBP';
+
+	public $default_display_currency = 'GBP';
 
 	/**
 	 * Casts to a string, preserving NULLs along the way.
@@ -72,9 +74,10 @@ class Kohana_Jam_Field_Price extends Jam_Field_String {
 		if ( ! ($value instanceof Jam_Price) AND $value !== NULL)
 		{
 			$currency = method_exists($model, 'currency') ? $model->currency() : $this->default_currency;
+			$display_currency = method_exists($model, 'display_currency') ? $model->display_currency() : $this->default_display_currency;
 			$monetary = method_exists($model, 'monetary') ? $model->monetary() : Monetary::instance();
 
-			$value = new Jam_Price($value, $currency, $monetary);
+			$value = new Jam_Price($value, $currency, $monetary, $display_currency);
 		}
 
 		return $value;

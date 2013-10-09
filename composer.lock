@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f89b367c9db58d87b920a48917fbd2d2",
+    "hash": "c7342393b02d5be65cd537e5933e0bfc",
     "packages": [
         {
             "name": "composer/installers",
@@ -169,16 +169,16 @@
         },
         {
             "name": "openbuildings/jam",
-            "version": "0.4.10",
+            "version": "0.4.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenBuildings/jam.git",
-                "reference": "99175a3373bf6bba597bac31e95b2712ddbb6ed0"
+                "reference": "00c5aec81b3a8278fda9095650ed100eb79e4ae9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenBuildings/jam/zipball/99175a3373bf6bba597bac31e95b2712ddbb6ed0",
-                "reference": "99175a3373bf6bba597bac31e95b2712ddbb6ed0",
+                "url": "https://api.github.com/repos/OpenBuildings/jam/zipball/00c5aec81b3a8278fda9095650ed100eb79e4ae9",
+                "reference": "00c5aec81b3a8278fda9095650ed100eb79e4ae9",
                 "shasum": ""
             },
             "require": {
@@ -188,6 +188,12 @@
             },
             "require-dev": {
                 "openbuildings/kohana-test-bootsrap": "0.1.*"
+            },
+            "suggest": {
+                "openbuildings/jam-auth": "A Kohana Auth implementation for Jam, with services",
+                "openbuildings/jam-closuretable": "Closuretable implementation for Jam ORM",
+                "openbuildings/jam-monetary": "Convert and format currencies and amounts with a Jam field",
+                "openbuildings/jam-tart": "Jam admin builder"
             },
             "type": "kohana-module",
             "notification-url": "https://packagist.org/downloads/",
@@ -212,7 +218,7 @@
                 "upload",
                 "validation"
             ],
-            "time": "2013-09-05 08:39:03"
+            "time": "2013-10-08 09:00:10"
         },
         {
             "name": "openbuildings/monetary",
@@ -325,16 +331,16 @@
     "packages-dev": [
         {
             "name": "openbuildings/kohana-test-bootsrap",
-            "version": "0.1.0",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenBuildings/kohana-test-bootstrap.git",
-                "reference": "00f1f6dad4a755662c5c77b3739d248614bab15d"
+                "reference": "57c9cae9bd97edbe58d1c41c35c499c7d54f4030"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenBuildings/kohana-test-bootstrap/zipball/00f1f6dad4a755662c5c77b3739d248614bab15d",
-                "reference": "00f1f6dad4a755662c5c77b3739d248614bab15d",
+                "url": "https://api.github.com/repos/OpenBuildings/kohana-test-bootstrap/zipball/57c9cae9bd97edbe58d1c41c35c499c7d54f4030",
+                "reference": "57c9cae9bd97edbe58d1c41c35c499c7d54f4030",
                 "shasum": ""
             },
             "type": "library",
@@ -356,7 +362,7 @@
                 }
             ],
             "description": "Kohana core classes repackaged with composer, used to test modules",
-            "time": "2013-08-12 09:28:25"
+            "time": "2013-10-01 08:57:54"
         }
     ],
     "aliases": [

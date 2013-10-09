@@ -55,7 +55,9 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$price2 = new Jam_Price(5, 'GBP');
 		$price3 = new Jam_Price(8.5, 'EUR');
 
-		$this->assertSame(40.238901914488, Jam_Price::sum(array($price1, $price2, $price3), 'USD', $monetary)->amount());
+		$expected = new Jam_Price(40.238901914488, 'USD', $monetary, 'EUR');
+
+		$this->assertEquals($expected, Jam_Price::sum(array($price1, $price2, $price3), 'USD', $monetary, 'EUR'));
 	}
 
 	/**
@@ -97,11 +99,14 @@ class Jam_PriceTest extends Testcase_Monetary {
 	{
 		$monetary = new OpenBuildings\Monetary\Monetary();
 		$monetary2 = new OpenBuildings\Monetary\Monetary();
-		$price = new Jam_Price(10, 'GBP', $monetary);
+		$price = new Jam_Price(10, 'GBP', $monetary, 'GBP');
+		$price2 = new Jam_Price(10, 'GBP', $monetary, 'EUR');
 
 		$this->assertSame(10.0, $price->amount());
 		$this->assertSame('GBP', $price->currency());
+		$this->assertSame('GBP', $price->display_currency());
 		$this->assertSame($monetary, $price->monetary());
+		$this->assertSame('EUR', $price2->display_currency());
 
 		$price->amount(20.10);
 		$price->currency('EUR');
@@ -122,6 +127,10 @@ class Jam_PriceTest extends Testcase_Monetary {
 
 		$this->assertSame('13.23', $price->as_string());
 		$this->assertSame('13.23', (string) $price);
+
+		$price->display_currency('EUR');
+
+		$this->assertSame('15.71', (string) $price);
 	}
 
 	/**
@@ -142,6 +151,9 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$price1 = new Jam_Price(13.234, 'GBP');
 		$this->assertNotEquals($price1->monetary(), $monetary);
 		$this->assertSame(13.234, $price1->in('GBP', $monetary));
+
+		$price1->display_currency('EUR');
+		$this->assertSame(15.761329125231, $price1->in(NULL, $monetary));
 	}
 
 	/**
@@ -228,6 +240,9 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$this->assertSame('£13.23', $price1->humanize());
 		$this->assertSame('$7.93', $price2->humanize('USD'));
 		$this->assertSame('€8.50', $price3->humanize());
+
+		$price1->display_currency('EUR');
+		$this->assertSame('€15.76', $price1->humanize());
 	}
 
 	public function test_serialize()

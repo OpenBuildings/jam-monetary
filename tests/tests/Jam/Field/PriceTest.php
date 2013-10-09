@@ -14,14 +14,18 @@ class Jam_Field_PriceTest extends Testcase_Monetary {
 		$this->assertSame('10.23', $product->price->as_string());
 		$this->assertSame('10.23', (string) $product->price);
 		$this->assertSame('GBP', $product->price->currency());
+		$this->assertSame('GBP', $product->price->display_currency());
+
 
 		$product->currency('EUR');
+		$product->display_currency('BGN');
 
 		$product->price = 8;
 
 		$this->assertInstanceOf('Jam_Price', $product->price);
 		$this->assertSame(8.0, $product->price->amount());
 		$this->assertSame('EUR', $product->price->currency());
+		$this->assertSame('BGN', $product->price->display_currency());
 
 		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
 		$product->monetary($monetary);

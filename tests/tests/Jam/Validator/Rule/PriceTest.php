@@ -10,13 +10,13 @@ class Jam_Validator_Rule_PriceTest extends Testcase_Monetary {
 	 */
 	public function test_validate()
 	{
-		$product = Jam::build('product', array('price' => 10));
+		$product = Jam::build('product', array('price' => -1));
 
 		$this->assertFalse($product->check());
-		$product->price = 30;
+		$product->price = 0;
 		$this->assertTrue($product->check());
 
-		$product = Jam::build('product', array('price' => 30));
+		$product = Jam::build('product', array('price' => 12));
 		$this->assertTrue($product->check());
 	}
 }

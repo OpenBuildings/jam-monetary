@@ -8,14 +8,15 @@ class Model_Product extends Jam_Model {
 			->fields(array(
 				'id' => Jam::field('primary'),
 				'name' => Jam::field('string'),
-				'price' => Jam::field('price', array('default_currency' => 'GBP')),
+				'price' => Jam::field('price', array('default_currency' => 'GBP', 'default_display_currency' => 'EUR')),
 			))
-			->validator('price', array('price' => array('greater_than' => 10)))
+			->validator('price', array('price' => array('greater_than_or_equal_to' => 0)))
 			->validator('currency', array('currency' => TRUE));
 
 	}
 
 	protected $_currency = 'GBP';
+	protected $_display_currency = 'GBP';
 	
 	protected $_monetary;
 	
@@ -37,5 +38,15 @@ class Model_Product extends Jam_Model {
 			return $this;
 		}
 		return $this->_currency;
+	}	
+
+	public function display_currency($display_currency = NULL)
+	{
+		if ($display_currency !== NULL)
+		{
+			$this->_display_currency = $display_currency;
+			return $this;
+		}
+		return $this->_display_currency;
 	}
 }
