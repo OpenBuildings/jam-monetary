@@ -192,7 +192,7 @@ class Kohana_Jam_Price implements Serializable {
 	 */
 	public function multiply_by($value)
 	{
-		return new Jam_Price($this->amount() * $value, $this->currency(), $this->monetary());
+		return new Jam_Price($this->amount() * $value, $this->currency(), $this->monetary(), $this->display_currency());
 	}
 
 	/**
@@ -202,7 +202,7 @@ class Kohana_Jam_Price implements Serializable {
 	 */
 	public function convert_to($currency)
 	{
-		return new Jam_Price($this->in($currency), $currency, $this->monetary());
+		return new Jam_Price($this->in($currency), $currency, $this->monetary(), $this->display_currency());
 	}
 
 	/**

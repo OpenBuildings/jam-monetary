@@ -67,12 +67,12 @@ class Jam_PriceTest extends Testcase_Monetary {
 	{
 		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
 
-		$price = new Jam_Price(13.234, 'GBP', $monetary);
+		$price = new Jam_Price(13.234, 'GBP', $monetary, 'EUR');
 
 		$converted = $price->convert_to('USD');
 
 		$this->assertEquals('USD', $converted->currency());
-		$this->assertEquals(20.98936199607, $converted->amount());
+		$this->assertEquals(new Jam_Price(20.98936199607, 'USD', $monetary, 'EUR'), $converted);
 	}
 
 	/**
@@ -82,11 +82,11 @@ class Jam_PriceTest extends Testcase_Monetary {
 	{
 		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
 
-		$price = new Jam_Price(13.234, 'GBP', $monetary);
+		$price = new Jam_Price(13.234, 'GBP', $monetary, 'EUR');
 
 		$converted = $price->multiply_by(3);
 
-		$this->assertEquals(13.234 * 3, $converted->amount());
+		$this->assertEquals(new Jam_Price(13.234 * 3, 'GBP', $monetary, 'EUR'), $converted);
 	}
 	
 	/**
