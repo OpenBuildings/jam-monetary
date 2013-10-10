@@ -139,7 +139,7 @@ class Kohana_Jam_Price implements Serializable {
 	{
 		$this->amount($amount);
 		$this->currency($currency);
-		$this->display_currency($display_currency ?: $currency);
+		$this->display_currency($display_currency);
 		$this->monetary($monetary);
 	}
 
@@ -168,7 +168,7 @@ class Kohana_Jam_Price implements Serializable {
 	 */
 	public function humanize($currency = NULL)
 	{
-		$currency = $currency ?: $this->display_currency();
+		$currency = $currency ?: ($this->display_currency() ?: $this->currency());
 
 		return $this->monetary()->format($this->in($currency), $currency);
 	}
@@ -248,8 +248,6 @@ class Kohana_Jam_Price implements Serializable {
 	 */
 	public function in($currency = NULL, $monetary = NULL)
 	{
-		$currency = $currency ?: $this->display_currency();
-
 		if ( ! $currency OR $currency == $this->currency())
 		{
 			return $this->amount();

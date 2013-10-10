@@ -12,7 +12,6 @@ class Model_Product extends Jam_Model {
 			))
 			->validator('price', array('price' => array('greater_than_or_equal_to' => 0)))
 			->validator('currency', array('currency' => TRUE));
-
 	}
 
 	protected $_currency = 'GBP';

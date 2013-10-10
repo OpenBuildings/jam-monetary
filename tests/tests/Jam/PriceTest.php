@@ -130,7 +130,7 @@ class Jam_PriceTest extends Testcase_Monetary {
 
 		$price->display_currency('EUR');
 
-		$this->assertSame('15.71', (string) $price);
+		$this->assertSame('13.23', (string) $price);
 	}
 
 	/**
@@ -153,7 +153,7 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$this->assertSame(13.234, $price1->in('GBP', $monetary));
 
 		$price1->display_currency('EUR');
-		$this->assertSame(15.761329125231, $price1->in(NULL, $monetary));
+		$this->assertSame(13.234, $price1->in(NULL, $monetary));
 	}
 
 	/**
