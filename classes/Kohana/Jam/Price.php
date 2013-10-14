@@ -182,7 +182,7 @@ class Kohana_Jam_Price implements Serializable {
 		$prices = func_get_args();
 		array_unshift($prices, $this);
 
-		return Jam_Price::sum($prices, $this->currency(), $this->monetary());
+		return Jam_Price::sum($prices, $this->currency(), $this->monetary(), $this->display_currency());
 	}
 
 	/**

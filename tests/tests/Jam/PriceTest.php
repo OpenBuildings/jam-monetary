@@ -206,7 +206,10 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$price1 = new Jam_Price(13.234, 'GBP', $monetary);
 		$price2 = new Jam_Price(5, 'GBP', $monetary);
 		$price3 = new Jam_Price(8.5, 'EUR', $monetary);
-		$this->assertSame(13.234 + 5, $price1->add($price2)->amount());
+
+		$added_price = $price1->add($price2);
+		$this->assertSame(13.234 + 5, $added_price->amount());
+		$this->assertSame($price1->display_currency(), $added_price->display_currency());
 
 		$price1 = new Jam_Price(13.234, 'GBP', $monetary);
 		$price2 = new Jam_Price(5, 'GBP', $monetary);
@@ -227,6 +230,11 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$price2 = new Jam_Price(5, 'GBP', $monetary);
 		$price3 = new Jam_Price(8.5, 'EUR', $monetary);
 		$this->assertSame(13.234 + 5 + 7.137025 + 10 + 12.32, $price1->add($price2, $price3, 10, '12.32')->amount());
+
+		$price1 = new Jam_Price(13.234, 'GBP', $monetary, 'EUR');
+		$price2 = new Jam_Price(5, 'GBP', $monetary, 'GBP');
+		$added_price = $price1->add($price2);
+		$this->assertSame($price1->display_currency(), $added_price->display_currency());
 	}
 
 	public function test_humanize()
