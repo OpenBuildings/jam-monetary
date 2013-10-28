@@ -16,7 +16,7 @@
 		"php": ">=5.3.0",
 		"composer/installers": "*",
 		"openbuildings/jam": "0.4.*",
-		"openbuildings/monetary": "0.3.*"
+		"openbuildings/monetary": "0.4.*"
 	},
 	"require-dev": {
 		"openbuildings/kohana-test-bootsrap": "0.1.*"

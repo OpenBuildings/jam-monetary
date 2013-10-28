@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c7342393b02d5be65cd537e5933e0bfc",
+    "hash": "e2ae46bf0ecca3eca945ce60cef15445",
     "packages": [
         {
             "name": "composer/installers",
@@ -222,16 +222,16 @@
         },
         {
             "name": "openbuildings/monetary",
-            "version": "0.3.1",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenBuildings/monetary.git",
-                "reference": "401f0c306a775280d31a526b0064c037cb087f7e"
+                "reference": "a76f0aef2ffe0c975302cc87c7494e532bca48e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenBuildings/monetary/zipball/401f0c306a775280d31a526b0064c037cb087f7e",
-                "reference": "401f0c306a775280d31a526b0064c037cb087f7e",
+                "url": "https://api.github.com/repos/OpenBuildings/monetary/zipball/a76f0aef2ffe0c975302cc87c7494e532bca48e1",
+                "reference": "a76f0aef2ffe0c975302cc87c7494e532bca48e1",
                 "shasum": ""
             },
             "require": {
@@ -262,11 +262,13 @@
                 },
                 {
                     "name": "Haralan Dobrev",
-                    "email": "hdobrev@despark.com"
+                    "email": "hdobrev@despark.com",
+                    "role": "Author"
                 },
                 {
                     "name": "Yasen Yanev",
-                    "email": "yasen@openbuildings.com"
+                    "email": "yasen@openbuildings.com",
+                    "role": "Author"
                 }
             ],
             "description": "Useful tool for formatting and converting currencies",
@@ -280,7 +282,7 @@
                 "money",
                 "yahoo"
             ],
-            "time": "2013-08-23 13:23:09"
+            "time": "2013-10-28 10:34:43"
         },
         {
             "name": "rackspace/php-opencloud",
