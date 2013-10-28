@@ -33,8 +33,11 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$price3 = new Jam_Price(8.5, 'EUR', $monetary);
 
 		$result = Jam_Price::max(array($price1, $price2, $price3));
-
 		$this->assertSame($price1, $result);
+
+		$price4 = new Jam_Price(17.2, 'EUR', $monetary);
+
+		$this->assertSame($price4, Jam_Price::max(array($result, $price4)));
 	}
 	/**
 	 * @covers Jam_Price::sum
