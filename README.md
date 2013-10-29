@@ -1,6 +1,6 @@
 # Jam Monetary
 
-A Jam Field to transparently use "monetary" as a jam field, and have currency exchange arithmetic out of the box
+A Jam Field to transparently use "[monetary](https://github.com/OpenBuildings/monetary)" as a Jam field, and have currency exchange arithmetic out of the box
 
 [![Build Status](https://travis-ci.org/OpenBuildings/jam-monetary.png?branch=master)](https://travis-ci.org/OpenBuildings/jam-monetary)
 [![Coverage Status](https://coveralls.io/repos/OpenBuildings/jam-monetary/badge.png?branch=master)](https://coveralls.io/r/OpenBuildings/jam-monetary?branch=master)
@@ -10,7 +10,7 @@ A Jam Field to transparently use "monetary" as a jam field, and have currency ex
 
 In your model, define the field as usual:
 
-```php
+``` php
 class Model_Product extends Jam_Model {
 
 	static public function initialize(Jam_Meta $meta)
@@ -28,7 +28,7 @@ class Model_Product extends Jam_Model {
 
 And to use it you can:
 
-```php
+``` php
 $product = Jam::build('product', array('price' => 10));
 
 echo $product->price->amount();         // will output 10.00 float
@@ -55,17 +55,17 @@ $product->price->add(new Jam_Price(20, 'EUR'), new Jam_Price(10, 'GBP'), 12.32);
 
 ## Methods
 
-- ``in($currency)`` : display the amount in the specified currency, put through number_format with 2 digits after the dot
-- ``as_string($currency = NULL)`` : return the number_format() on the price's amount, with 2 digits after the dot.
-- ``humanize($currency = NULL)`` : display the amount with showing the proper currency sign in the correct position
-- ``as_html($currency = NULL)`` : same as `humanize()`, but with HTML entities support
-- ``add(... prices)`` : add one or more price values to this price (you can add negative prices in order to substract)
+- `in($currency)` : display the amount in the specified currency, put through number_format with 2 digits after the dot
+- `as_string($currency = NULL)` : return the number_format() on the price's amount, with 2 digits after the dot.
+- `humanize($currency = NULL)` : display the amount with showing the proper currency sign in the correct position
+- `as_html($currency = NULL)` : same as `humanize()`, but with HTML entities support
+- `add(... prices)` : add one or more price values to this price (you can add negative prices in order to substract)
 
 ## Automatic currency and monetary values
 
-If the model has a method ``currency()``, then each time a price object is requested, the result of this method is used for the price currency. That will allow you storing the currency alongside the amount iteself in the model
+If the model has a method `currency()`, then each time a price object is requested, the result of this method is used for the price currency. That will allow you storing the currency alongside the amount iteself in the model
 
-The same goes for a ``monetary()`` method - if its there in the model, then it'll be used for all the conversions. 
+The same goes for a `monetary()` method - if its there in the model, then it'll be used for all the conversions. 
 
 ## Validators
 
@@ -75,8 +75,7 @@ The price rule is basically a numeric rule, which performes the checks on the pr
 
 The currency validator is a choice validator, with the currencies of the world preselected in the "in" variable.
 
-```php
-```php
+``` php
 class Model_Product extends Jam_Model {
 
 	static public function initialize(Jam_Meta $meta)
@@ -95,7 +94,7 @@ class Model_Product extends Jam_Model {
 
 ## License
 
-Copyright (c) 2012-2013, OpenBuildings Ltd. Developed by Ivan Kerin as part of [clippings.com](http://clippings.com)
+Copyright (c) 2012-2013, OpenBuildings Ltd. Developed by Ivan Kerin as part of [clippings.com](https://clippings.com)
 
-Under BSD-3-Clause license, read LICENSE file.
+Under BSD-3-Clause license, read [LICENSE file](LICENSE).
 
