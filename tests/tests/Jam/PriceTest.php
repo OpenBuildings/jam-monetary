@@ -240,6 +240,9 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$this->assertSame($price1->display_currency(), $added_price->display_currency());
 	}
 
+	/**
+	 * @covers Jam_Price::humanize
+	 */
 	public function test_humanize()
 	{
 		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
@@ -256,6 +259,29 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$this->assertSame('€15.76', $price1->humanize());
 	}
 
+	/**
+	 * @covers Jam_Price::as_html
+	 */
+	public function test_as_html()
+	{
+		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
+
+		$price1 = new Jam_Price(13.234, 'GBP', $monetary);
+		$price2 = new Jam_Price(5, 'GBP', $monetary);
+		$price3 = new Jam_Price(8.5, 'EUR', $monetary);
+
+		$this->assertSame('&pound;13.23', $price1->as_html());
+		$this->assertSame('$7.93', $price2->as_html('USD'));
+		$this->assertSame('&euro;8.50', $price3->as_html());
+
+		$price1->display_currency('EUR');
+		$this->assertSame('&euro;15.76', $price1->as_html());
+	}
+
+	/**
+	 * @covers Jam_Price::serialize
+	 * @covers Jam_Price::unserialize
+	 */
 	public function test_serialize()
 	{
 		$price1 = new Jam_Price(13.234, 'GBP');

@@ -174,6 +174,16 @@ class Kohana_Jam_Price implements Serializable {
 	}
 
 	/**
+	 * Replace HTML entities in humanize
+	 * @param  string $currency optionally convert to another currency
+	 * @return string
+	 */
+	public function as_html($currency = NULL)
+	{
+		return HTML::entities($this->humanize($currency));
+	}
+
+	/**
 	 * Perform price arithmetic - add / remove prices with correct currency convertions
 	 * @return $this
 	 */
