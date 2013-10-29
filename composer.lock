@@ -222,16 +222,16 @@
         },
         {
             "name": "openbuildings/monetary",
-            "version": "0.4.0",
+            "version": "0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenBuildings/monetary.git",
-                "reference": "a76f0aef2ffe0c975302cc87c7494e532bca48e1"
+                "reference": "f05bc74cadc6d850b199705f10ee590aaf3bbd59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenBuildings/monetary/zipball/a76f0aef2ffe0c975302cc87c7494e532bca48e1",
-                "reference": "a76f0aef2ffe0c975302cc87c7494e532bca48e1",
+                "url": "https://api.github.com/repos/OpenBuildings/monetary/zipball/f05bc74cadc6d850b199705f10ee590aaf3bbd59",
+                "reference": "f05bc74cadc6d850b199705f10ee590aaf3bbd59",
                 "shasum": ""
             },
             "require": {
@@ -282,7 +282,7 @@
                 "money",
                 "yahoo"
             ],
-            "time": "2013-10-28 10:34:43"
+            "time": "2013-10-28 11:21:15"
         },
         {
             "name": "rackspace/php-opencloud",
