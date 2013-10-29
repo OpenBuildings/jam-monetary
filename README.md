@@ -37,8 +37,11 @@ echo $product->price;                   // will output '10.00'
 echo $product->price->as_string();      // will output '10.00'
 echo $product->price->as_string('USD'); // will output '10.00'
 echo $product->price->in('USD');        // will output 18.12 float
-echo $product->price->humanize();         // will output '£10.00'
-echo $product->price->humanize('USD');    // will output '$18.12'
+echo $product->price->humanize();       // will output '£10.00'
+echo $product->price->humanize('USD');  // will output '$18.12'
+echo $product->price->as_html();        // will output '&pound;10.00'
+echo $product->price->as_html('USD');   // will output '$18.12'
+echo $product->price->as_html('EUR');   // will output '&euro;18.12'
 
 // Price arithmetic
 $product->price->add(10);
@@ -54,7 +57,8 @@ $product->price->add(new Jam_Price(20, 'EUR'), new Jam_Price(10, 'GBP'), 12.32);
 
 - ``in($currency)`` : display the amount in the specified currency, put through number_format with 2 digits after the dot
 - ``as_string($currency = NULL)`` : return the number_format() on the price's amount, with 2 digits after the dot.
-- ``humanize($currency = NULL)`` : display the amount with shoing the proper currency sign in the correct position
+- ``humanize($currency = NULL)`` : display the amount with showing the proper currency sign in the correct position
+- ``as_html($currency = NULL)`` : same as `humanize()`, but with HTML entities support
 - ``add(... prices)`` : add one or more price values to this price (you can add negative prices in order to substract)
 
 ## Automatic currency and monetary values
