@@ -3,7 +3,8 @@
 A Jam Field to transparently use "[monetary](https://github.com/OpenBuildings/monetary)" as a Jam field, and have currency exchange arithmetic out of the box
 
 [![Build Status](https://travis-ci.org/OpenBuildings/jam-monetary.png?branch=master)](https://travis-ci.org/OpenBuildings/jam-monetary)
-[![Coverage Status](https://coveralls.io/repos/OpenBuildings/jam-monetary/badge.png?branch=master)](https://coveralls.io/r/OpenBuildings/jam-monetary?branch=master)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/OpenBuildings/jam-monetary/badges/quality-score.png?s=6194f9de11ac08d898eb47f1bb8fd56c5cd219c3)](https://scrutinizer-ci.com/g/OpenBuildings/jam-monetary/)
+[![Code Coverage](https://scrutinizer-ci.com/g/OpenBuildings/jam-monetary/badges/coverage.png?s=829163347844e6e490f51eb32b90cb46b9eefce7)](https://scrutinizer-ci.com/g/OpenBuildings/jam-monetary/)
 [![Latest Stable Version](https://poser.pugx.org/openbuildings/jam-monetary/v/stable.png)](https://packagist.org/packages/openbuildings/jam-monetary)
 
 ## Usage
