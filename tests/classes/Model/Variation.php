@@ -8,7 +8,7 @@ class Model_Variation extends Jam_Model {
 			->fields(array(
 				'id' => Jam::field('primary'),
 				'name' => Jam::field('string'),
-				'price' => Jam::field('price', array('default_currency' => 'GBP')),
+				'price' => Jam::field('price', array('default_currency' => 'GBP', 'default_ceil_on_convert' => 2)),
 			))
 			->validator('price', array('price' => TRUE));
 

@@ -21,6 +21,25 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$this->assertSame($price2, $result);
 	}
 
+	public function data_ceil()
+	{
+		return array(
+			array(12.33, 0, 13),
+			array(12.33, 2, 12.33),
+			array(12.3343, 2, 12.34),
+			array(12.762, 2, 12.77),
+		);
+	}
+
+	/**
+	 * @covers Jam_Price::ceil
+	 * @dataProvider data_ceil
+	 */
+	public function test_ceil($amount, $precision, $expected)
+	{
+		$this->assertEquals($expected, Jam_Price::ceil($amount, $precision));
+	}
+
 	/**
 	 * @covers Jam_Price::max
 	 */
@@ -100,10 +119,11 @@ class Jam_PriceTest extends Testcase_Monetary {
 	 */
 	public function test_construct()
 	{
-		$monetary = new OpenBuildings\Monetary\Monetary();
-		$monetary2 = new OpenBuildings\Monetary\Monetary();
+		$monetary = new OpenBuildings\Monetary\Monetary;
+		$monetary2 = new OpenBuildings\Monetary\Monetary;
 		$price = new Jam_Price(10, 'GBP', $monetary, 'GBP');
 		$price2 = new Jam_Price(10, 'GBP', $monetary, 'EUR');
+		$price3 = new Jam_Price(10, 'GBP', $monetary, 'EUR', TRUE);
 
 		$this->assertSame(10.0, $price->amount());
 		$this->assertSame('GBP', $price->currency());
@@ -118,6 +138,7 @@ class Jam_PriceTest extends Testcase_Monetary {
 		$this->assertSame(20.10, $price->amount());
 		$this->assertSame('EUR', $price->currency());
 		$this->assertSame($monetary2, $price->monetary());
+		$this->assertSame(TRUE, $price3->ceil_on_convert());
 	}
 
 	/**
@@ -145,6 +166,7 @@ class Jam_PriceTest extends Testcase_Monetary {
 
 		$price1 = new Jam_Price(13.234, 'GBP', $monetary);
 		$price2 = new Jam_Price(8.5, 'EUR', $monetary);
+		$price3 = new Jam_Price(8.534, 'EUR', $monetary, 'GBP', TRUE);
 
 		$this->assertSame(13.234, $price1->in('GBP'));
 		$this->assertSame(8.5, $price2->in('EUR'));
@@ -157,6 +179,28 @@ class Jam_PriceTest extends Testcase_Monetary {
 
 		$price1->display_currency('EUR');
 		$this->assertSame(13.234, $price1->in(NULL, $monetary));
+
+		$this->assertEquals(8, $price3->in('GBP'), 'Should ceil on convert');
+	}
+
+	/**
+	 * @covers Jam_Price::ceil_on_convert
+	 */
+	public function test_ceil_on_convert()
+	{
+		$monetary = new OpenBuildings\Monetary\Monetary('GBP', new OpenBuildings\Monetary\Source_Static);
+
+		$price = new Jam_Price(13.234, 'EUR', $monetary);
+
+		$this->assertFalse($price->ceil_on_convert());
+
+		$this->assertSame($price, $price->ceil_on_convert(TRUE));
+
+		$this->assertTrue($price->ceil_on_convert());
+
+		$price->ceil_on_convert(3);
+
+		$this->assertEquals(3, $price->ceil_on_convert());
 	}
 
 	/**

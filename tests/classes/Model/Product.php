@@ -16,6 +16,7 @@ class Model_Product extends Jam_Model {
 
 	protected $_currency = 'GBP';
 	protected $_display_currency = 'GBP';
+	protected $_ceil_on_convert = 2;
 	
 	protected $_monetary;
 	
@@ -47,5 +48,15 @@ class Model_Product extends Jam_Model {
 			return $this;
 		}
 		return $this->_display_currency;
+	}
+
+	public function ceil_on_convert($ceil_on_convert = NULL)
+	{
+		if ($ceil_on_convert !== NULL)
+		{
+			$this->_ceil_on_convert = $ceil_on_convert;
+			return $this;
+		}
+		return $this->_ceil_on_convert;
 	}
 }

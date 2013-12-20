@@ -46,6 +46,13 @@ class Kohana_Jam_Price implements Serializable {
 		return $max;
 	}
 
+	public static function ceil($amount, $precision)
+	{
+		$fraction = pow(10, $precision);
+
+		return ceil($fraction * $amount) / $fraction;
+	}
+
 	public static function sum(array $prices, $currency, $monetary = NULL, $display_currency = NULL)
 	{
 		$amount = 0;
@@ -72,7 +79,18 @@ class Kohana_Jam_Price implements Serializable {
 	protected $_amount = 0;
 	protected $_currency;
 	protected $_monetary;
+	protected $_ceil_on_convert = FALSE;
 	protected $_display_currency;
+	
+	public function ceil_on_convert($ceil_on_convert = NULL)
+	{
+		if ($ceil_on_convert !== NULL)
+		{
+			$this->_ceil_on_convert = $ceil_on_convert;
+			return $this;
+		}
+		return $this->_ceil_on_convert;
+	}
 	
 	public function display_currency($display_currency = NULL)
 	{
@@ -135,12 +153,13 @@ class Kohana_Jam_Price implements Serializable {
 		return $this->_monetary;
 	}
 
-	public function __construct($amount, $currency, $monetary = NULL, $display_currency = NULL)
+	public function __construct($amount, $currency, $monetary = NULL, $display_currency = NULL, $ceil_on_convert = FALSE)
 	{
 		$this->amount($amount);
 		$this->currency($currency);
 		$this->display_currency($display_currency);
 		$this->monetary($monetary);
+		$this->ceil_on_convert($ceil_on_convert);
 	}
 
 	/**
@@ -192,7 +211,7 @@ class Kohana_Jam_Price implements Serializable {
 		$prices = func_get_args();
 		array_unshift($prices, $this);
 
-		return Jam_Price::sum($prices, $this->currency(), $this->monetary(), $this->display_currency());
+		return Jam_Price::sum($prices, $this->currency(), $this->monetary(), $this->display_currency(), $this->ceil_on_convert());
 	}
 
 	/**
@@ -202,7 +221,7 @@ class Kohana_Jam_Price implements Serializable {
 	 */
 	public function multiply_by($value)
 	{
-		return new Jam_Price($this->amount() * $value, $this->currency(), $this->monetary(), $this->display_currency());
+		return new Jam_Price($this->amount() * $value, $this->currency(), $this->monetary(), $this->display_currency(), $this->ceil_on_convert());
 	}
 
 	/**
@@ -212,7 +231,7 @@ class Kohana_Jam_Price implements Serializable {
 	 */
 	public function convert_to($currency)
 	{
-		return new Jam_Price($this->in($currency), $currency, $this->monetary(), $this->display_currency());
+		return new Jam_Price($this->in($currency), $currency, $this->monetary(), $this->display_currency(), $this->ceil_on_convert());
 	}
 
 	/**
@@ -266,7 +285,14 @@ class Kohana_Jam_Price implements Serializable {
 		{
 			$monetary = $monetary ?: $this->monetary();
 
-			return $monetary->convert($this->amount(), $this->currency(), $currency);
+			$amount = $monetary->convert($this->amount(), $this->currency(), $currency);
+
+			if ($this->ceil_on_convert() !== FALSE)
+			{
+				$amount = static::ceil($amount, $this->ceil_on_convert() === TRUE ? 0 : $this->ceil_on_convert());
+			}
+
+			return $amount;
 		}
 	}
 
@@ -276,7 +302,7 @@ class Kohana_Jam_Price implements Serializable {
 	 */
 	public function serialize()
 	{
-		return serialize(array($this->amount(), $this->currency(), $this->display_currency()));
+		return serialize(array($this->amount(), $this->currency(), $this->display_currency(), $this->ceil_on_convert()));
 	}
 
 	/**
@@ -290,6 +316,7 @@ class Kohana_Jam_Price implements Serializable {
 		$this->amount($data[0]);
 		$this->currency($data[1]);
 		$this->display_currency($data[2]);
+		$this->ceil_on_convert($data[3]);
 		$this->monetary(Monetary::instance());
 	}
 }
