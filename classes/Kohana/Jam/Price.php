@@ -53,7 +53,7 @@ class Kohana_Jam_Price implements Serializable {
 		return ceil($fraction * $amount) / $fraction;
 	}
 
-	public static function sum(array $prices, $currency, $monetary = NULL, $display_currency = NULL)
+	public static function sum(array $prices, $currency, $monetary = NULL, $display_currency = NULL, $ceil_on_convert = FALSE)
 	{
 		$amount = 0;
 
@@ -73,7 +73,7 @@ class Kohana_Jam_Price implements Serializable {
 			}
 		}
 
-		return new Jam_Price($amount, $currency, $monetary, $display_currency);
+		return new Jam_Price($amount, $currency, $monetary, $display_currency, $ceil_on_convert);
 	}
 
 	protected $_amount = 0;
