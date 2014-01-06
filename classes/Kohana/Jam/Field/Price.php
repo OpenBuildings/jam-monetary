@@ -66,6 +66,11 @@ class Kohana_Jam_Field_Price extends Jam_Field_String {
 		return array($value, $return);
 	}
 
+	public function monetary()
+	{
+		return Monetary::instance();
+	}
+
 	/**
 	 * convert to Jam_Price if not NULL 
 	 * @param  Jam_Validated $model     
@@ -77,7 +82,7 @@ class Kohana_Jam_Field_Price extends Jam_Field_String {
 	{
 		if ( ! ($value instanceof Jam_Price) AND $value !== NULL)
 		{
-			$value = new Jam_Price($value, $this->default_currency, NULL, $this->default_display_currency, $this->default_ceil_on_convert);
+			$value = new Jam_Price($value, $this->default_currency, $this->monetary(), $this->default_display_currency, $this->default_ceil_on_convert);
 
 			foreach (static::$autoload_from_model as $autoload_method) 
 			{
