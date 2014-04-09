@@ -1,22 +1,28 @@
---- 
+---
 language: php
 
 php:
   - 5.3
+  - 5.4
 
 notifications:
-  campfire:
-    rooms:
-      secure: eqcQU+McD4KAQrVNKsNy1Mw3imK+fVFctPoRNpIdI2dObicXyqD9Iz5qZM9T8bq0RKpJz/N7ZPixVqO/W6ySfFB9qWNROOFsOs06TIjZt11uJ38C77c327nhYVzesLQ8UBtlPvZh5EY7Vivc+bvncCXFOCHvynOAtJTra/zm9NM=
+  email: true
+  slack:
+    secure: gya91s1Ez6f5JlcHVh/x9lDSI+1yFdLtunQWOAc6oao7dpankDmtGEKM7zhnxyT+wxn9m+XABbRkkolpr5UVFKcGiP50riWIB1Nicl6VOoF7EYFAt4mdfeR29YYoq8S0o3+jl4z+fAMNuU+RAipKIlXdcviHFzG9Ps6EKaxquqs=
 
-script:
-  - phpunit --coverage-clover build/logs/clover.xml
+
+install:
+  - composer selfupdate
+  - composer install --no-interaction
 
 before_script:
   - mkdir -p build/logs
   - composer install --dev
   - mysql -e 'create database `test-jam-monetary`;'
   - mysql test-jam-monetary < tests/test_data/structure.sql
+
+script:
+  - phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
