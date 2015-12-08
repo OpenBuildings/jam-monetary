@@ -16,6 +16,8 @@ class Kohana_Jam_Price implements Serializable {
 	const GREATER_THAN_OR_EQUAL_TO = '>=';
 	const LESS_THAN_OR_EQUAL_TO = '<=';
 
+	const EPSILON = 0.000001;
+
 	public static function min(array $prices)
 	{
 		$min = reset($prices);
@@ -250,19 +252,19 @@ class Kohana_Jam_Price implements Serializable {
 		switch ($operator) 
 		{
 			case Jam_Price::EQUAL_TO:
-				$result = ($this->amount() == $value);
+				$result = (abs($this->amount() - $value) < Jam_Price::EPSILON);
 			break;
 			case Jam_Price::GREATER_THAN:
-				$result = ($this->amount() > $value);
+				$result = (($this->amount() - $value) >= Jam_Price::EPSILON);
 			break;
 			case Jam_Price::LESS_THAN:
-				$result = ($this->amount() < $value);
+				$result = (($value - $this->amount()) >= Jam_Price::EPSILON);
 			break;
 			case Jam_Price::GREATER_THAN_OR_EQUAL_TO:
-				$result = ($this->amount() >= $value);
+				$result = (($value - $this->amount()) < Jam_Price::EPSILON);
 			break;
 			case Jam_Price::LESS_THAN_OR_EQUAL_TO:
-				$result = ($this->amount() <= $value);
+				$result = (($this->amount() - $value) < Jam_Price::EPSILON);
 			break;
 			default;
 				throw new Kohana_Exception('Operator not supported :operator', array(':operator' => $operator));
