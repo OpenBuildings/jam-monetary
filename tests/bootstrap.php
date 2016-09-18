@@ -21,14 +21,14 @@ spl_autoload_register(function($class)
 Kohana::$config
 	->load('database')
 		->set('default', array(
-			'type'       => 'MySQL',
+			'type'       => 'PDO',
 			'connection' => array(
-				'hostname'   => 'localhost',
-				'database'   => 'test-jam-monetary',
+                'dsn' => 'mysql:host=localhost;dbname=test-jam-monetary',
 				'username'   => 'root',
 				'password'   => '',
 				'persistent' => TRUE,
 			),
+            'identifier' => '`',
 			'table_prefix' => '',
 			'charset'      => 'utf8',
 			'caching'      => FALSE,
