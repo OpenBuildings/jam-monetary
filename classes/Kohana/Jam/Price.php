@@ -274,7 +274,8 @@ class Kohana_Jam_Price implements Serializable {
 
 	/**
 	 * Display the amount in a currency
-	 * @param  stirn $currency 
+	 * @param  string|null $currency
+	 * @param  OpenBuildings\Monetary\Monetary|null $monetary
 	 * @return float
 	 */
 	public function in($currency = NULL, $monetary = NULL)
