@@ -50,7 +50,7 @@ class Kohana_Jam_Field_Price extends Jam_Field_String {
 		$value = $this->run_filters($model, $value);
 
 		// Convert empty values to NULL, if needed
-		if ($this->convert_empty AND empty($value) AND $value !== 0 AND $value !== 0.0)
+		if ($this->convert_empty AND empty($value) AND $value !== 0 AND $value !== 0.0 AND $value !== '0')
 		{
 			$value  = $this->empty_value;
 			$return = TRUE;
