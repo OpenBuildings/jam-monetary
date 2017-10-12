@@ -39,15 +39,18 @@ class Kohana_Jam_Field_Price extends Jam_Field_String {
 
 	/**
 	 * Preserve nulls and 0 / 0.0 values
-	 * @param  Jam_Validated $model 
-	 * @param  mixed        $value 
-	 * @return array               
+	 * @param  Jam_Validated $model
+	 * @param  mixed        $value
+	 * @return array
 	 */
 	protected function _default(Jam_Validated $model, $value)
 	{
 		$return = FALSE;
 
 		$value = $this->run_filters($model, $value);
+        if (is_string($value)) {
+            $value = (float) $value;
+        }
 
 		// Convert empty values to NULL, if needed
 		if ($this->convert_empty AND empty($value) AND $value !== 0 AND $value !== 0.0)
@@ -72,11 +75,11 @@ class Kohana_Jam_Field_Price extends Jam_Field_String {
 	}
 
 	/**
-	 * convert to Jam_Price if not NULL 
-	 * @param  Jam_Validated $model     
-	 * @param  mixed        $value     
-	 * @param  boolean        $is_loaded 
-	 * @return Jam_Price                   
+	 * convert to Jam_Price if not NULL
+	 * @param  Jam_Validated $model
+	 * @param  mixed        $value
+	 * @param  boolean        $is_loaded
+	 * @return Jam_Price
 	 */
 	public function get(Jam_Validated $model, $value, $is_loaded)
 	{
@@ -84,9 +87,9 @@ class Kohana_Jam_Field_Price extends Jam_Field_String {
 		{
 			$value = new Jam_Price($value, $this->default_currency, $this->monetary(), $this->default_display_currency, $this->default_ceil_on_convert);
 
-			foreach (static::$autoload_from_model as $autoload_method) 
+			foreach (static::$autoload_from_model as $autoload_method)
 			{
-				if (method_exists($model, $autoload_method)) 
+				if (method_exists($model, $autoload_method))
 				{
 					$value->$autoload_method($model->$autoload_method());
 				}
