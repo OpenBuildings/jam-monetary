@@ -48,9 +48,9 @@ class Kohana_Jam_Field_Price extends Jam_Field_String {
 		$return = FALSE;
 
 		$value = $this->run_filters($model, $value);
-        if (is_string($value)) {
-            $value = (float) $value;
-        }
+		if ((is_string($value) AND is_numeric($value)) OR is_int($value) ) {
+			$value = (float) $value;
+		}
 
 		// Convert empty values to NULL, if needed
 		if ($this->convert_empty AND empty($value) AND $value !== 0 AND $value !== 0.0)
