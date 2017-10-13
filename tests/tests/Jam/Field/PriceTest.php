@@ -70,6 +70,7 @@ class Jam_Field_PriceTest extends Testcase_Monetary {
 			array(1, 1.0),
 			array(1.11, 1.11),
 			array('0', 0.0),
+			array('0.0', 0.0),
 			array('1', 1.0),
 			array('1.11', 1.11),
 			array('-1.11', -1.11),
