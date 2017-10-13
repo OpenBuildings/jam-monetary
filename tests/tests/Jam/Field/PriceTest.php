@@ -61,4 +61,40 @@ class Jam_Field_PriceTest extends Testcase_Monetary {
 
 		$this->assertSame(OpenBuildings\Monetary\Monetary::instance(), $price->monetary());
 	}
+
+
+	public function data_set()
+	{
+		return array(
+			array(0, 0.0),
+			array(1, 1.0),
+			array(1.11, 1.11),
+			array('0', 0.0),
+			array('1', 1.0),
+			array('1.11', 1.11),
+			array('-1.11', -1.11),
+			array(true, true),
+			array('', null),
+			array(null, null),
+			array(false, null),
+			array(array(), null),
+			array('', '', false),
+			array(null, null, false),
+			array(false, false, false),
+			array(array(), array(), false),
+		);
+	}
+
+	/**
+	 * @dataProvider data_set
+	 */
+
+	public function test_set($price, $expected, $convert_empty = true)
+	{
+		$product = Jam::build('product');
+		$jamPriceField = new Kohana_Jam_Field_Price();
+		$jamPriceField->convert_empty = $convert_empty;
+		$this->assertSame($expected, $jamPriceField->set($product, $price, false));
+
+	}
 }
