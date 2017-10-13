@@ -38,7 +38,7 @@ class Kohana_Jam_Field_Price extends Jam_Field_String {
 	}
 
 	/**
-	 * Preserve nulls and 0 / 0.0 values
+	 * Preserve nulls and 0 / 0.0 / '0' / '0.0' values
 	 * @param  Jam_Validated $model
 	 * @param  mixed        $value
 	 * @return array
@@ -53,7 +53,7 @@ class Kohana_Jam_Field_Price extends Jam_Field_String {
 		}
 
 		// Convert empty values to NULL, if needed
-		if ($this->convert_empty AND empty($value) AND $value !== 0 AND $value !== 0.0)
+		if ($this->convert_empty AND empty($value) AND $value !== 0.0)
 		{
 			$value  = $this->empty_value;
 			$return = TRUE;
