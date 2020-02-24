@@ -4,11 +4,9 @@ language: php
 sudo: false
 
 php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
   - 7.1
+  - 7.2
+  - 7.3
 
 env:
   - DEPS=normal
@@ -31,6 +29,9 @@ notifications:
   slack:
     secure: j0M/YHcUXUB3WIkGM2zVodP7FePghAJ4WsqsloTHfelGTbO3MNfA7bQy+rqixm3bSd4EoAa5AKt74eyDzORkpovXQX0gcP6HsskSNoRUthP1tNPj0c8/yvpWExOcQQO3l39vAJKpdKGOp/KXraU0j36m9lbte2e+Pyg0kUHKDaA=
 
+services:
+  - mysql
+
 before_install: travis_retry composer selfupdate --preview
 
 install:
@@ -44,7 +45,7 @@ before_script:
   - mysql test-jam-monetary < tests/test_data/structure.sql
 
 script:
-  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
