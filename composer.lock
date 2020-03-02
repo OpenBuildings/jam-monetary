@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aee1225c9fb16bfba2bfc57f1b14ed9c",
+    "content-hash": "566615237f86ad5bd0cfdb58a88e5407",
     "packages": [
         {
             "name": "composer/installers",
@@ -183,26 +183,26 @@
         },
         {
             "name": "openbuildings/monetary",
-            "version": "0.4.1",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenBuildings/monetary.git",
-                "reference": "f05bc74cadc6d850b199705f10ee590aaf3bbd59"
+                "reference": "430b988f47e28fd9d004d8670b1a1a7de3e436c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenBuildings/monetary/zipball/f05bc74cadc6d850b199705f10ee590aaf3bbd59",
-                "reference": "f05bc74cadc6d850b199705f10ee590aaf3bbd59",
+                "url": "https://api.github.com/repos/OpenBuildings/monetary/zipball/430b988f47e28fd9d004d8670b1a1a7de3e436c9",
+                "reference": "430b988f47e28fd9d004d8670b1a1a7de3e436c9",
                 "shasum": ""
             },
             "require": {
                 "desarrolla2/cache": "1.6.*",
                 "ext-curl": "*",
                 "ext-simplexml": "*",
-                "php": ">=5.3.0"
+                "php": "^7.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "~3.7.24"
+                "phpunit/phpunit": "^7"
             },
             "type": "library",
             "autoload": {
@@ -216,21 +216,16 @@
             ],
             "authors": [
                 {
+                    "name": "Yasen Yanev",
+                    "email": "yasen@openbuildings.com"
+                },
+                {
                     "name": "Ivan Kerin",
-                    "email": "ivan@openbuildings.com",
-                    "homepage": "https://github.com/OpenBuildings/jam",
-                    "role": "Author"
+                    "email": "ivan@openbuildings.com"
                 },
                 {
                     "name": "Haralan Dobrev",
-                    "email": "hdobrev@despark.com",
-                    "homepage": "https://github.com/hkdobrev",
-                    "role": "Author"
-                },
-                {
-                    "name": "Yasen Yanev",
-                    "email": "yasen@openbuildings.com",
-                    "role": "Author"
+                    "email": "hdobrev@despark.com"
                 }
             ],
             "description": "Useful tool for formatting and converting currencies",
@@ -244,7 +239,7 @@
                 "money",
                 "yahoo"
             ],
-            "time": "2013-10-28T11:21:15+00:00"
+            "time": "2020-02-21T09:15:06+00:00"
         }
     ],
     "packages-dev": [
@@ -567,20 +562,21 @@
                 }
             ],
             "description": "Flexible storage provider for files (rackspace, aws, ftp, local)",
+            "abandoned": true,
             "time": "2014-07-08T12:07:06+00:00"
         },
         {
             "name": "openbuildings/jam",
-            "version": "0.5.24",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenBuildings/jam.git",
-                "reference": "3239e93564d100ddb65055235f87ec99fc0d4370"
+                "reference": "dbaa321ebbce31374db45bc85f1d60d118e4cc02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenBuildings/jam/zipball/3239e93564d100ddb65055235f87ec99fc0d4370",
-                "reference": "3239e93564d100ddb65055235f87ec99fc0d4370",
+                "url": "https://api.github.com/repos/OpenBuildings/jam/zipball/dbaa321ebbce31374db45bc85f1d60d118e4cc02",
+                "reference": "dbaa321ebbce31374db45bc85f1d60d118e4cc02",
                 "shasum": ""
             },
             "require": {
@@ -589,15 +585,14 @@
                 "kohana/database": "^3.3.0",
                 "kohana/image": "^3.3.0",
                 "openbuildings/flex-storage": "^0.1.3",
-                "php": ">=5.4"
+                "php": "^7.1"
             },
             "require-dev": {
-                "openbuildings/jam-monetary": "^0.1",
+                "openbuildings/jam-monetary": "^0.2",
                 "openbuildings/kohana-test-bootstrap": "^0.2",
-                "phpunit/phpunit": "~4.0.0",
-                "phpunit/phpunit-dom-assertions": "^0.1",
-                "symfony/css-selector": ">=2.3",
-                "symfony/dom-crawler": ">=2.3"
+                "phpunit/phpunit": "^7",
+                "symfony/css-selector": "^4.4",
+                "symfony/dom-crawler": "^4.4"
             },
             "suggest": {
                 "openbuildings/jam-auth": "A Kohana Auth implementation for Jam, with services",
@@ -627,7 +622,7 @@
                 "upload",
                 "validation"
             ],
-            "time": "2018-10-11T08:08:53+00:00"
+            "time": "2020-02-28T09:50:03+00:00"
         },
         {
             "name": "openbuildings/kohana-test-bootstrap",
