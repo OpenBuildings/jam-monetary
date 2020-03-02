@@ -15,12 +15,12 @@
 	"require": {
 		"php": "^7.1",
 		"composer/installers": "*",
-		"openbuildings/monetary": "~0.4.1"
+		"openbuildings/monetary": "^0.5"
 	},
 	"require-dev": {
 		"openbuildings/kohana-test-bootstrap": "^0.2.0",
 		"phpunit/phpunit": "^7",
-		"openbuildings/jam": "^0.5.13"
+		"openbuildings/jam": "^0.6"
 	},
 	"config": {
 		"platform": {
